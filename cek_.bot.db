@@ -1,0 +1,23 @@
+#!/bin/bash
+clear
+# Nama file .bot.db
+db_file=".bot.db"
+# masukan
+read -rp "masukkan id baru: " new
+# Chat ID yang ingin ditambahkan
+chat_id2="$new"
+
+# Membaca token dan chat_id1 dari file .bot.db
+read -r _ token chat_id1 < "$db_file"
+
+# Cek apakah chat_id sudah ada atau belum
+if [[ $chat_id1 == $chat_id2 ]]; then
+    echo "Chat ID $chat_id2 sudah ada dalam database."
+    exit
+else
+    echo "Chat ID $chat_id2 belum ada dalam database."
+# Menambahkan chat_id2 ke dalam file .bot.db
+echo "#bot# $token $chat_id1 $chat_id2" > "$db_file"
+
+echo -e "chat_id $chat_id2 berhasil ditambahkan ke dalam file $db_file"
+fi
